@@ -1,28 +1,126 @@
 <template>
   <div class="head">
     <div class="topbar">
-      <div class="city-picker">
-        深圳
-        <span class="city-wrap"></span>
-      </div>
-      <div class="ui-searchbox">
+      <v-touch class="city-picker iconfont" v-html="iconLeft+title"
+        :tap="handleBtn(title)"
+      >
+      </v-touch>
+      <div class="ui-searchbox" >
         <div class="ui-inner">
-          <div class="ui-wrap">
-            <div class="ui-icon icon-search"></div>
-            <span class="ui-placeholder">搜索明星、演出、场馆</span>
-          </div>
+          <router-link class="ui-wrap"
+            tag="div"
+            to="/search"
+            >
+            <div class="ui-icon iconfont icon-search">&#xe630;</div>
+          <input class="ui-placeholder" placeholder="搜索明星、演出、场馆" />
+        </router-link>
         </div>
-      </div>
+      </div >
       <div class="person-wrap">
-        <a class="person-icon"></a>
+        <router-link 
+          tag="div"
+          to="/mine"
+        class="person-icon iconfont" v-html="iconRight"></router-link>
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+    name:"Header",
+    props:{
+        title:{
+            type:String,
+            default:"北京"
+        },
+        iconLeft:{
+          type:String,
+          default:"&#xe61e;"
+        },
+        iconRight:{
+          type:String,
+          default:"&#xe614;"
+        },
+    },
+    methods:{
+      handleBtn(params){
+      //   console.log(params);
+      //  if(params =="返回"){
+      //       this.$router.back();
+      //   }else{
+      //     this.$router.push("");
+      //   }
+      }
+    }
+}
 </script>
 <style lang="scss">
+.head{
+    height:0.44rem;
+    position: relative;;
+    left:0;
+    top:0;
+    background-color: #fff;
+}
+.topbar{
+    height:0.44rem;
+    display:flex;
+}
+.topbar .city-picker{
+    width:0.56rem;
+    height:0.44rem;
+    font-size:0.14rem;
+    color:#262626;
+    text-align:center;
+    line-height:0.44rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.topbar .city-wrap{
+    display: block;
+}
+.topbar .ui-searchbox{
+    flex:1;
+    height:0.44rem;
+    padding:5px 0 5px 8px;
+}
+.topbar  .ui-inner{
+    height:100%;
+}
+.topbar .ui-wrap{
+    width:100%;
+    height:100%;
+    border-radius:0.17rem;
+    background-color:#eee;
+    display:flex;
+    align-items:center;
+}
+.topbar .ui-wrap .ui-icon{
+    margin: 0 0.1rem;
+    color:#262626;
+}
+.topbar .ui-wrap .ui-placeholder{
+     color:#262626;
+    font-size:0.15rem;
+    outline:none;
+    border:none;
+    background-color:#eee;
+}
+
+.topbar .person-wrap{
+    width:0.44rem;
+    height:0.44rem;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+.topbar .person-icon{
+    width:100%;height:100%;
+    text-align:center;
+    line-height:0.44rem;
+    font-size:0.23rem;
+}
 
 
 
