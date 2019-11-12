@@ -4,8 +4,7 @@
       <router-link tag="li" 
             v-for="item in navs" 
             :key="item.id" 
-            :to="item.path"
-            
+            :to="item.path"  
       >
         <i class="iconfont" v-html="item.icon"></i>
         <span class="title">{{item.text}}</span>
