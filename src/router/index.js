@@ -6,6 +6,7 @@ import find from "./find";
 import login from "./login";
 import message from "./message";
 import mine from "./mine";
+import search from "./search";
 Vue.use(VueRouter);
 
 const router =new VueRouter({
@@ -20,7 +21,8 @@ const router =new VueRouter({
         find, 
         login,
         message,
-        mine
+        mine,
+        search
     ]
 })
 
