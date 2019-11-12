@@ -24,5 +24,7 @@ a { color:#666; text-decoration:none; }
 a, body, h1, h2, h3, input, li, p, textarea, ul{
  line-height: 1.2;
 }
-
+#app{
+    height:100%;
+}
 
