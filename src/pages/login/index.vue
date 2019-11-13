@@ -18,22 +18,70 @@
         </v-touch>
         <div class="login">
              <p class="count">账户密码登录</p>
-            <input type="text" placeholder="请输入手机号">
-            <input type="text" placeholder="请输入密码">
-            <p>登录</p>
+            <input type="text" placeholder="请输入手机号" @input="handleAccount($event)"> 
+            <input type="text" placeholder="请输入密码" @input="handlePwd($event)">
+            <v-touch tag="p" @tap="handleLogin()">登录</v-touch>
         </div>
     </div>
     </div>
 </template>
 
 <script>
+import axios from "axios"
 export default {
     name:"Login",
+    data(){
+        return{
+            name:"",
+            password:"",
+            lib:[]
+
+        }
+    },
     methods:{
         handleback(){
             this.$router.back()
+        },
+        handleAccount(e){
+            let account=e.target.value;
+            console.log(account)
+            this.name=account
+        },
+        handlePwd(e){
+            let pwd=e.target.value;
+            console.log(pwd)
+            this.password=pwd
+        },
+        handleLogin(){
+            console.log(this.lib[2])
+            for(let i=0;i<this.lib.length;i++){
+                console.log(111)
+                if(this.name==this.lib[i].tel && this.password==this.lib[i].pwd){
+                    this.$router.push("/mine")
+                }else{
+                    console.log(222)
+                }
+            }
         }
-    }
+    },
+    created(){
+        axios({
+        method:"get",
+        url:"/users/list",
+        // data:{
+        //     account,
+        //     pwd
+        // }
+     
+    }).then((data)=>{
+      console.log(data)
+      this.lib=data.data.data.list;
+
+
+    })
+  
+}
+   
 }
 </script>
 <style scoped>

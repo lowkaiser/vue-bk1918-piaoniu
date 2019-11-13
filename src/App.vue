@@ -8,11 +8,13 @@
 
 <script>
 import TabBar from "@common/components/tabBar"
+
 export default {
   name: 'app',
   components: {
     TabBar,
   },
+  
 }
 </script>
 
