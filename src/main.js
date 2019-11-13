@@ -4,6 +4,8 @@ import router from "./router"
 import VueTouch from "vue-touch";
 import "@common/components";
 import { Swipe, SwipeItem } from 'vant';
+
+import "./mock"
 Vue.use(Swipe).use(SwipeItem);
 Vue.use(VueTouch,{name:"v-touch"});
 new Vue({
