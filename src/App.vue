@@ -13,9 +13,6 @@ export default {
   components: {
     TabBar,
   },
-  created(){
-    console.log(this)
-  }
 }
 </script>
 

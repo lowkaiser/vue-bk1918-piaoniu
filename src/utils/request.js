@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const server= axios.create ({
-    timeout=5000,
+    timeout:5000,
     withCreadentials:true 
 })
 
@@ -19,7 +19,7 @@ server.interceptors.request.use((config)=>{
 }
 
 
-server.interceptors.response.user((res)=>{
+server.interceptors.response.use((res)=>{
     if(res.status == 200){
         return res.data;
     }

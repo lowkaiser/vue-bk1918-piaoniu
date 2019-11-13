@@ -4,6 +4,6 @@ export default {
     name:"mine",
     meta:{
         flag:true,
-        requiredAuth:true,
+        requiredAuth:false,
     }
 }

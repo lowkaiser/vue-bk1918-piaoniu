@@ -2,7 +2,8 @@
   <div class="head">
     <div class="topbar">
       <v-touch class="city-picker iconfont" v-html="iconLeft+title"
-        :tap="handleBtn(title)"
+        tag="div"
+        @tap="handleHeadBtn(title)"
       >
       </v-touch>
       <div class="ui-searchbox" >
@@ -43,13 +44,12 @@ export default {
         },
     },
     methods:{
-      handleBtn(params){
-      //   console.log(params);
-      //  if(params =="返回"){
-      //       this.$router.back();
-      //   }else{
-      //     this.$router.push("");
-      //   }
+      handleHeadBtn(params){
+        if(params=="返回"){
+          this.$router.back();
+        }else{
+          this.$router.push("/city")
+        }
       }
     }
 }

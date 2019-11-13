@@ -7,6 +7,7 @@ import login from "./login";
 import message from "./message";
 import mine from "./mine";
 import search from "./search";
+import city from "./city";
 Vue.use(VueRouter);
 
 const router =new VueRouter({
@@ -22,7 +23,8 @@ const router =new VueRouter({
         login,
         message,
         mine,
-        search
+        search,
+        city
     ]
 })
 
