@@ -6,7 +6,7 @@ module.exports ={
         proxy:{
             "/api":{
                 target:"https://m.piaoniu.com",
-                changeOrigin:true
+                changeOrigin:true,
             }
         }
     },

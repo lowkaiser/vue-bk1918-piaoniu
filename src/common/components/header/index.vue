@@ -61,6 +61,7 @@ export default {
     left:0;
     top:0;
     background-color: #fff;
+    z-index:10;
 }
 .topbar{
     height:0.44rem;

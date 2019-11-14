@@ -1,7 +1,9 @@
 <template>
     <div>
         <div class="hot_city">
-            <div class="hot_title">热门城市</div>
+            <div class="hot_title">
+                <span>热门城市</span>
+                </div>
             <div class="hot_city_list">
                 <div class="hot_city_name">北京</div>
                 <div class="hot_city_name">北京</div>
