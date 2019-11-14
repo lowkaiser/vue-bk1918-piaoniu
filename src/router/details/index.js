@@ -3,7 +3,7 @@ export default {
     component:_=>import("@components/details"),
     name:"details",
     meta:{
-        flag:true,
+        flag:false,
         requriedAuth:false
     }
 }

@@ -16,12 +16,8 @@
         <v-touch class="back" tag="div" @tap="handleback()">
             <img src="http://static.piaoniu.com/m/static/img/back-grey.b0b2b3e.png" alt="">
         </v-touch>
-        <div class="login">
-             <p class="count">账户密码登录</p>
-            <input type="text" placeholder="请输入手机号" @input="handleAccount($event)"> 
-            <input type="text" placeholder="请输入密码" @input="handlePwd($event)">
-            <v-touch tag="p" @tap="handleLogin()">登录</v-touch>
-        </div>
+        <router-view></router-view>
+        
     </div>
     </div>
 </template>
@@ -30,14 +26,14 @@
 import axios from "axios"
 export default {
     name:"Login",
-    data(){
-        return{
-            name:"",
-            password:"",
-            lib:[]
+    // data(){
+    //     return{
+    //         name:"",
+    //         password:"",
+    //         lib:[]
 
-        }
-    },
+    //     }
+    // },
     methods:{
         handleback(){
             this.$router.back()
@@ -64,23 +60,19 @@ export default {
             }
         }
     },
-    created(){
-        axios({
-        method:"get",
-        url:"/users/list",
-        // data:{
-        //     account,
-        //     pwd
-        // }
-     
-    }).then((data)=>{
-      console.log(data)
-      this.lib=data.data.data.list;
+//     created(){
+//         axios({
+//         method:"get",
+//         url:"/users/list",
+        
+//     }).then((data)=>{
+//       console.log(data)
+//       this.lib=data.data.data.list;
 
 
-    })
+//     })
   
-}
+// }
    
 }
 </script>
