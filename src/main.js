@@ -4,8 +4,11 @@ import router from "./router"
 import VueTouch from "vue-touch";
 import store from "./store";
 import "@common/components";
+import "@common/filter";
 import { Swipe, SwipeItem } from 'vant';
+import { Sticky } from 'vant';
 
+Vue.use(Sticky);
 import "./mock"
 Vue.use(Swipe).use(SwipeItem);
 Vue.use(VueTouch,{name:"v-touch"});
