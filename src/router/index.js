@@ -8,7 +8,8 @@ import message from "./message";
 import mine from "./mine";
 import search from "./search";
 import city from "./city";
-import details from "./details"
+import details from "./details";
+import mainPerson from "./mainPerson"
 Vue.use(VueRouter);
 
 const router =new VueRouter({
@@ -26,7 +27,8 @@ const router =new VueRouter({
         mine,
         search,
         city,
-        details
+        details,
+        mainPerson
     ]
 })
 
