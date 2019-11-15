@@ -10,6 +10,13 @@ import search from "./search";
 import city from "./city";
 import details from "./details";
 import goodsOrder from "./goodsOrder";
+import mainPerson from "./mainPerson";
+import wantWatch from "./wantWatch";
+import wantTo from "./wantTo";
+import wantFan from "./wantFan";
+import wantComment from "./wantComment";
+import allComment from "./allComment";
+import myaddr from "./address"
 Vue.use(VueRouter);
 
 const router =new VueRouter({
@@ -28,7 +35,14 @@ const router =new VueRouter({
         search,
         city,
         details,
-        goodsOrder
+        goodsOrder,
+        mainPerson,
+        wantWatch,
+        wantTo,
+        wantFan,
+        wantComment,
+        allComment,
+        myaddr
     ]
 })
 

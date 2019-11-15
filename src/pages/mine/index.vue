@@ -1,14 +1,6 @@
 <template>
   <div class="page">
-    <div class="header_box">
-      <div class="header">
-        <!-- <div class="header_btn"><img src="http://static.piaoniu.com/m/static/img/back-grey.b0b2b3e.png" alt="">
-        </div>-->
-        <div class="header_title">
-          <p>我的</p>
-        </div>
-      </div>
-    </div>
+   <Mined imgB="" comment=""/>
 
     <div class="center">
       <!-- 个人主页 -->
@@ -25,7 +17,7 @@
                 <router-link tag="p" to="/login">{{username}}</router-link>
               </div>
               <div class="person_btn">
-                <p>个人主页</p>
+                <router-link tag="p" to="/mainPerson">个人主页</router-link>
                 <img src="http://static.piaoniu.com/m/static/img/arr-right.1655c6a.png" alt />
               </div>
             </div>
@@ -34,19 +26,19 @@
         <div class="person_counts">
           <div class="count_box">
             <p class="count_num">0</p>
-            <p class="count_text">想看</p>
+            <v-touch tag="p" @tap="handleWatch()" class="count_text">想看</v-touch>
           </div>
           <div class="count_box">
             <p class="count_num">0</p>
-            <p class="count_text">评论</p>
+            <v-touch tag="p" @tap="handleComment()" class="count_text">评论</v-touch>
           </div>
           <div class="count_box">
             <p class="count_num">0</p>
-            <p class="count_text">关注</p>
+             <v-touch tag="p" @tap="handleTo()" class="count_text">关注</v-touch>
           </div>
           <div class="count_box">
             <p class="count_num">0</p>
-            <p class="count_text">粉丝</p>
+             <v-touch tag="p" @tap="handleFan()" class="count_text">粉丝</v-touch>
           </div>
         </div>
       </div>
@@ -112,7 +104,7 @@
       <!-- 地址管理 -->
       <div class="manage_box">
         <div class="manage">
-          <p>地址管理</p>
+          <router-link tag="p" to="/myaddr">地址管理</router-link>
           <img src="http://static.piaoniu.com/m/static/img/arr-right.1655c6a.png" alt />
         </div>
         <div class="manage">
@@ -124,6 +116,7 @@
           <img src="http://static.piaoniu.com/m/static/img/arr-right.1655c6a.png" alt />
         </div>
       </div>
+     
 
       <!-- 退出登录 -->
       <div class="quit">
@@ -143,6 +136,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Mine",
    data() {
@@ -162,8 +156,19 @@ methods: {
        this.username=this.$route.params.tel
 
         }
-
-    }
+    },
+    handleWatch(){
+       this.$router.push("/wantWatch")
+    },
+     handleComment(){
+       this.$router.push("/wantComment")
+    },
+     handleTo(){
+       this.$router.push("/wantTo")
+    },
+     handleFan(){
+       this.$router.push("/wantFan")
+    },
 },
  
   
@@ -175,47 +180,10 @@ body {
   background: #f6f7f9;
 }
 /* header start */
-.header_box {
-  background: #fff;
-  -height: 0.44rem;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-.header {
-  display: flex;
-}
-.header_btn {
-  width: 0.44rem;
-  height: 0.44rem;
-  padding-left: 0.14rem;
-  display: flex;
-  align-items: center;
-}
-.header_btn img {
-  width: 0.11rem;
-  height: 0.19rem;
-}
-.header_title {
-  height: 0.44rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  -padding-right: 0.44rem;
-}
-.header_title p {
-  font-size: 0.17rem;
-  color: #525252;
-}
 
-.center {
-  height: 100%;
-  margin-top: 0.44rem;
-}
 /* 个人主页 */
 .person_box {
+  margin-top:0.4rem;
   width: 100%;
   background: linear-gradient(270deg, #ff5aa5 0%, #ff2661 100%);
 }

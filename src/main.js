@@ -12,6 +12,10 @@ import { ActionSheet } from 'vant';
 
 Vue.use(ActionSheet);
 Vue.use(SubmitBar);
+import { AddressEdit } from 'vant';
+
+Vue.use(AddressEdit);
+
 Vue.use(Sticky);
 import "./mock"
 Vue.use(Swipe).use(SwipeItem);

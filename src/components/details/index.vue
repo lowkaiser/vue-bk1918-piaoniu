@@ -273,8 +273,10 @@
 
     <!-- comment -->
     <div class="comment">
-      <p>所有评论138条</p>
-      <p>全部评论</p>
+     
+     
+        <p>所有评论138条</p>
+        <router-link tag="p" to="allComment">全部评论</router-link>
     </div>
 
     <!-- 相关演出 -->
@@ -926,6 +928,64 @@ body {
   font-size: 0.1rem;
   color: #999;
 }
+.rel{
+    margin-top:0.1rem;
+    background: #fff;
+    padding-bottom: 0.15rem;
+    padding:0 0.15rem
+}
+.rel p{
+    line-height: 0.55rem;
+    font-weight: 700;
+    font-size: 0.15rem;
+    -padding-left: 15px;
+}
+.relative .box{
+    height:1.46rem;
+    padding-top:0.15rem;
+    display: flex;
+}
+.relative .box img{
+    width:0.75rem;
+    height:1rem;
+}
+.relative .box .info{
+    width:1.98rem;
+    height:100%;
+    margin-left:0.15rem;
+    border-bottom: 1px solid hsla(0,0%,90%,.5);
+}
+.relative .box .info .title-line{
+    font-size: 0.15rem;
+    color: #333;
+    line-height: 0.22rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+}
+.relative .box .info .time-address{
+    font-size: 0.12rem;
+    color: #999;
+    margin-top: 9px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.relative .box .info .no-rank{
+    font-size: 0.1rem;
+    color: #999;
+    margin:0.04rem 0 0.16rem;
+}
+
+.relative .box .info .price-wrap ._price{
+    color: #ff2661;
+    font-size: 0.18rem;
+    font-weight: 700;
+}
+.relative .box .info .price-wrap .qi{
+    font-size: 0.1rem;
+    color: #999;
+} 
 
 /* 底部 */
 .footerr {

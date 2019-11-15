@@ -4,13 +4,43 @@
             <input type="text" placeholder="请输入手机号" @input="handleAccount($event)"> 
             <input type="text" placeholder="请输入密码" @input="handlePwd($event)">
            <router-link tag="div" to="/login/logined">已有账号，立即登录</router-link>
-            <v-touch tag="p" @tap="handleregister()" >注册</v-touch>
+            <v-touch tag="p" @tap="handleregistered()" >注册</v-touch>
         </div>
 </template>
 
 <script>
+import {handleRegister} from "@api/user"
 export default {
-
+    data(){
+        return {
+            name:"",
+            password:"",
+        }
+    },
+     methods:{
+         handleAccount(e){
+            let account=e.target.value;
+            this.name=account;
+            console.log(this.name)
+        },
+        handlePwd(e){
+            let pwd=e.target.value;
+            this.password=pwd
+            console.log(this.password)
+        },
+     async handleregistered(){
+            let tel=this.name; 
+            let pwd=this.password;
+               console.log(tel,pwd)
+            //console.log("/users/list?tel="+tel+"&pwd="+pwd)
+            let data=await handleRegister(tel,pwd);
+            // if(data.data.info=="成功"){
+                console.log(data)
+            //    this.$router.push({name:"mine",params:{tel:tel}})
+            //    console.log(this.$route.params.tel)
+          // }
+        }
+    },
 }
 </script>
 
