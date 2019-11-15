@@ -127,7 +127,7 @@
     </div>
     <!-- 更多精彩内容 -->
     <div class="piaoquan">
-      <router-link tag="span" to="/details">更多精彩内容待你发现</router-link>
+      <router-link to="/details" tag="span">更多精彩内容待你发现</router-link>
       <span class="arrow">></span>
     </div>
     <!-- 猜你喜欢 -->
@@ -160,7 +160,9 @@
         </ul>
       </div>
     </div>
-    <router-view></router-view>
+    <keep-alive>
+        <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 

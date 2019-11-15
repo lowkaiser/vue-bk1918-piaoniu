@@ -25,7 +25,7 @@
                 <router-link tag="p" to="/login">{{username}}</router-link>
               </div>
               <div class="person_btn">
-                <p>个人主页</p>
+                <router-link tag="p" to="/mainPerson">个人主页</router-link>
                 <img src="http://static.piaoniu.com/m/static/img/arr-right.1655c6a.png" alt />
               </div>
             </div>

@@ -312,6 +312,8 @@
         </div>
         <div>这就预定</div>
     </div>
+    details
+    
   </div>
 </template>
 <script>

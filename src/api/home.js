@@ -28,3 +28,19 @@ export const gussLike = (pageIndex) => http({
     }
 })
 //全部 详情页面 
+// https://m.piaoniu.com/api/v3/activities
+// export const  detailsData = (pageIndex)=>http({
+//     method:"get",
+//         url:"/api/v3/activities",
+//         data:{
+//             pageIndex,
+//             categoryId: 1,
+//             seatMap: false,
+//             snapUpActivity: false,
+//             sort: "",
+//             time: "",
+//             highestPrice:"",
+//             lowestPrice:"",
+//             pageSize:10
+//         }
+// })
