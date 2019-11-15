@@ -57,7 +57,7 @@ console.log(dataList)
 //     }
 //     return obj;
 // })
-Mock.mock(/\/users\/list/, "get", (options) => {
+Mock.mock(/\/users\/login/, "get", (options) => {
     console.log(options)
     let tel = options.url.split("?")[1].split("&")[0].split("=")[1];
     let pwd = options.url.split("?")[1].split("&")[1].split("=")[1];
@@ -66,7 +66,9 @@ Mock.mock(/\/users\/list/, "get", (options) => {
         errMsg: "",
         data: {
             info: "",
-            list: []
+            list: [],
+
+
         }
     }
 
@@ -83,6 +85,54 @@ Mock.mock(/\/users\/list/, "get", (options) => {
     }
     return obj;
 })
-// export default {
-//     findOne
-// }
+
+Mock.mock(/\/users\/register/, "get", (options) =>{
+    let tel = options.url.split("?")[1].split("&")[0].split("=")[1];
+    let pwd = options.url.split("?")[1].split("&")[1].split("=")[1];
+
+    
+    console.log(options)
+    var objData={
+
+    }
+    var obj1 = {
+        code: 2000,
+        errMsg: "",
+        data1: {
+            info: "",
+            list: []
+        }
+    }
+
+    for (let i = 0; i < dataList.length; i++) {
+
+        if (tel == dataList[i].tel) {
+            //this.$router.push("/mine")
+            //obj.data.list.push(dataList[i])
+            obj1.data1.info = "已注册";
+            break;
+        } else {
+            let username=tel;
+            let password=pwd;
+            objData.tel=username;
+            objData.ped=password;
+            obj1.data1.info = "注册成功";
+           
+        }
+    }
+    dataList.push(objData);
+   
+    // if(tel && pwd){
+    //     let username=tel;
+    //     let password=pwd;
+    //     obj1.data1.list.push({tel:username,pwd:password})
+
+    //     console.log(options)
+    //     console.log(obj1.data1.list)
+    // }
+    return {dataList,obj1};
+  
+    
+})
+
+

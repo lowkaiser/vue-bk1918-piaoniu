@@ -6,5 +6,4 @@ export default {
         flag: false,
         requiredAuth: false,
     },
-
 }

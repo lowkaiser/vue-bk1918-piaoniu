@@ -37,57 +37,10 @@ export default {
                 console.log(data.data)
                this.$router.push({name:"mine",params:{tel:tel}})
                console.log(this.$route.params.tel)
-            
            }
-           //this.$router.push("/mine")
-            
-           //console.log(this.name,this.password)
-
-    //            axios({
-    //             method:"get",
-    //             url:"/users/list",
-    //           data:{
-    //         tel:this.name,
-    //         pwd:this.password
-    //     }
-    // }).then((data)=>{
-    //   //console.log(data)
-    //  // this.lib=data.data.data.list;
-    // }).catch((data)=>{
-    //     console.log(data)
-    // })
-
-   
-
-
-
-
-            // for(let i=0;i<this.lib.length;i++){
-            //     console.log(111)
-            //     if(this.name==this.lib[i].tel && this.password==this.lib[i].pwd){
-            //         this.$router.push("/mine")
-            //     }else{
-            //         console.log(222)
-            //     }
-            // }
         }
     },
      created(){
-
-    //     axios({
-    //     method:"get",
-    //     url:"/users/list",
-    //     data:{
-    //         tel:this.name,
-    //         pwd:this.password
-    //     }
-    // }).then((data)=>{
-    //   console.log(data)
-    //   this.lib=data.data.data.list;
-
-
-    // })
-  
 }
 }
 </script>

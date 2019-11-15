@@ -8,6 +8,10 @@ import "@common/filter";
 import { Swipe, SwipeItem } from 'vant';
 import { Sticky } from 'vant';
 
+import { AddressEdit } from 'vant';
+
+Vue.use(AddressEdit);
+
 Vue.use(Sticky);
 import "./mock"
 Vue.use(Swipe).use(SwipeItem);

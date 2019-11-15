@@ -232,7 +232,7 @@
     <!-- comment -->
     <div class="comment">
         <p>所有评论138条</p>
-        <p>全部评论</p>
+        <router-link tag="p" to="allComment">全部评论</router-link>
     </div>
 
     <!-- 相关演出 -->
@@ -837,12 +837,13 @@ body{
     margin-top:0.1rem;
     background: #fff;
     padding-bottom: 0.15rem;
+    padding:0 0.15rem
 }
 .rel p{
     line-height: 0.55rem;
     font-weight: 700;
-    font-size: 15px;
-    padding-left: 15px;
+    font-size: 0.15rem;
+    -padding-left: 15px;
 }
 .relative .box{
     height:1.46rem;
@@ -856,7 +857,7 @@ body{
 .relative .box .info{
     width:1.98rem;
     height:100%;
-    margin-left:0.2rem;
+    margin-left:0.15rem;
     border-bottom: 1px solid hsla(0,0%,90%,.5);
 }
 .relative .box .info .title-line{

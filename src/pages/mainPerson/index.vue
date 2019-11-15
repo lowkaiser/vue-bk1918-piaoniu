@@ -194,6 +194,7 @@ header {
     justify-content: space-between;
     font-size: 0.18rem;
     color: #fff;
+    border-top: 0;
 }
 .footer .left2{
     display: flex;
@@ -237,7 +238,7 @@ header {
 }
 main{
     flex: 1;
-    background: #f5f5f5;
+    -background: #f5f5f5;
 }
 main ul{
     width:100%;
