@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <Header></Header>
+    <Header :title="this.$store.state.city.cityName"></Header>
     <!-- banner -->
     <div class="banner">
       <van-swipe :autoplay="3000" indicator-color="white">
@@ -29,16 +29,12 @@
     <!-- middle nav -->
     <div class="home-entries">
       <ul class="main-categories">
-        <router-link class="entry" v-for="item in iconImg" :key="item.id" to="/perform">
-          <img src="http://assets.piaoniu.com/home/icons/category-live-large.png" />
-          <div class="title">演唱会</div>
+        <router-link class="entry" 
+        tag="li"
+        v-for="(item,index) in iconImg" :key="index" :to="{name:'perform',params:{path:index-0+1}}">
+          <img :src="item.icon" />
+          <div class="title">{{item.text}}</div>
         </router-link>
-      </ul>
-      <ul class="sub-categories">
-        <li class="entry-sub" v-for="item in iconImg" :key="item.id">
-          <img src="http://assets.piaoniu.com/home/icons/category-live-large.png" />
-          <div class="title">演唱会</div>
-        </li>
       </ul>
     </div>
     <!-- 免费抽奖 -->
@@ -135,93 +131,131 @@
       <div class="guess-like-title">猜你喜欢</div>
       <div class="guess-like-wrap">
         <ul class="activity">
-          <li class="box" v-for="(item,index) in GussLike" :key="index">
+          <router-link class="box" 
+            tag="li"
+            :to="'details/'+item.id+'/'+item.properName"
+          v-for="(item,index) in GussLike" :key="index">
             <img
-              :src="item.recommendContent.poster"
+              :src="item.poster"
             />
             <div class="info">
               <div class="title-line">
-                <span>[深圳]</span>
-                <span> {{item.recommendContent.properName}}</span>
+                <span>[{{$store.state.city.cityName}}]</span>
+                <span> {{item.properName}}</span>
 
                 </div>
               <div class="time-address">
-                <span class="time">{{item.recommendContent.timeRange}}</span>
+                <span class="time">{{item.timeRange}}</span>
                 <span class="split">|</span>
-                <span class="address">{{item.recommendContent.venueName}}</span>
+                <span class="address">{{item.venueName}}</span>
               </div> 
-              <div class="no-rank" >{{item.recommendContent.star}}</div>
+              <div class="no-rank" >{{item.star}}</div>
               <div class="price-wrap">
-                <span class="price">{{item.recommendContent.lowPrice}}</span>
+                <span class="price">{{item.lowPrice}}</span>
                 <span class="qi">元起</span>
               </div>
             </div>
-          </li>
+          </router-link>
         </ul>
       </div>
     </div>
-    <keep-alive>
-        <router-view></router-view>
-    </keep-alive>
   </div>
 </template>
 
 <script>
-import { HotData,discountRate,gussLike} from "@api/home";
+import { HotData,discountRate,SearchData} from "@api/home";
 export default {
   name: "Home",
   data() {
     return {
       iconImg: [
         {
-          text: "",
-          icon: "&#xe737",
+          text: "演唱会",
+          icon: "http://assets.piaoniu.com/home/icons/category-live-large.png",
           path: ""
         },
         {
-          text: "",
-          icon: "&#xe612",
+          text: "话剧歌剧",
+          icon: "http://assets.piaoniu.com/home/icons/category-drama-large.png",
           path: ""
         },
         {
-          text: "",
-          icon: "&#xf0022",
+          text: "休闲展览",
+          icon: "http://assets.piaoniu.com/home/icons/category-exibition-large.png",
           path: ""
         },
         {
-          text: "",
-          icon: "&#xe6b0",
+          text: "体育赛事",
+          icon: "http://assets.piaoniu.com/home/icons/category-sports-large.png",
           path: ""
         },
         {
-          text: "",
-          icon: "&#xe60c",
+          text: "音乐会",
+          icon: "http://assets.piaoniu.com/home/icons/category-concert-large.png",
           path: ""
-        }
+        },
+        {
+          text: "儿童亲子",
+          icon: "http://assets.piaoniu.com/home/icons/category-child-small-v2.png",
+          path: ""
+        },
+        {
+          text: "戏曲综艺",
+          icon: "http://assets.piaoniu.com/home/icons/category-xiqu-small-v2.png",
+          path: ""
+        },
+        {
+          text: "舞蹈芭蕾",
+          icon: "http://assets.piaoniu.com/home/icons/category-dance-small.png",
+          path: ""
+        },
+        {
+          text: "旅游玩乐",
+          icon: "http://assets.piaoniu.com/home/icons/category-travel-small.png",
+          path: ""
+        },
+        {
+          text: "更多精彩",
+          icon: "http://assets.piaoniu.com/home/icons/category-play-small-v2.png",
+          path: ""
+        },
       ],
       hotContent: [],
       Discount:[],
       GussLike:[],
+      typeId:1,
     };
   },
   created() {
     this.handleGetHotData(2);
     this.handleDiscountRate(2);
-    this.handleGussLike(2);
+    this.handleGussLike(this.$store.state.city.cityName);
   },
-
+  activated(){
+    if(this.typeId == this.$store.state.city.cityId){
+          this.GussLike=JSON.parse(sessionStorage.getItem("gussLike"))
+    }else{
+      this.handleGetHotData(2)
+      this.handleDiscountRate(2)
+      this.handleGussLike(this.$store.state.city.cityName)
+      this.typeId=this.$store.state.city.cityId;
+    }
+  },
   methods: {
     async handleGetHotData(pageIndex) {
       let data = await HotData(pageIndex);
       this.hotContent = data.data;
+      sessionStorage.setItem("hotData",JSON.stringify(data.data))
     },
     async handleDiscountRate(pageIndex) {
       let data = await discountRate(pageIndex);
       this.Discount = data.data;
+      sessionStorage.setItem("discountData",JSON.stringify(data.data))
     },
-    async handleGussLike(pageIndex) {
-      let data = await gussLike(pageIndex);
-      this.GussLike = data.data;
+    async handleGussLike(input) {
+      let data = await SearchData(input);
+      this.GussLike = data;
+      sessionStorage.setItem("gussLike",JSON.stringify(data));
     },
   }
 };
@@ -244,16 +278,21 @@ export default {
 
 .home-entries {
   height: 1.66rem;
-  padding: 0.02rem 0.16rem 0;
+  padding: 0.02rem 0.15rem 0;
 }
 .home-entries .main-categories {
-  height: 0.9rem;
+  height: 0.8rem;
   display: flex;
+  flex-wrap:wrap;
   justify-content: space-between;
 }
 .home-entries .main-categories .entry {
-  margin-top: 0.22rem;
+  width:0.52rem;
+  margin-top: 0.16rem;
   height: 0.68rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 .home-entries .main-categories .entry img {
   width: 0.42rem;

@@ -26,10 +26,15 @@ export default {
 
             },
             //开启上拉加载更多 
-            pullUpLoad:true
+            pullUpLoad:true,
+            click:true,
+            tap:true
         })
     },
     methods:{
+        handleScrollTo(y){
+            this.scroll.scrollTo(0,y,300)
+        },
         handleScroll(){
             this.scroll.on("scroll",this.handleScrollCb)
         },

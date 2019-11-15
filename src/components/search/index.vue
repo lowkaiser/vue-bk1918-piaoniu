@@ -1,21 +1,18 @@
 <template>
   <div class="search">
-      <Header title="返回" iconLeft="" iconRight=""/>
-      <!-- <div class="cancle">取消</div> -->
-    
-    <div class="default-search list-keyword">
+    <Header title="返回" iconLeft iconRight />
+    <!-- <div class="cancle">取消</div> -->
+
+    <div class="default-search list-keyword" ref="search_Box">
       <div class="row-title">热门搜索</div>
       <div class="hot-searches">
-        <div class="keyword">周传雄</div>
-        <div class="keyword">吴青峰</div>
-        <div class="keyword">刘德华</div>
-        <div class="keyword">张韶涵</div>
-        <div class="keyword">周杰伦</div>
-        <div class="keyword">李荣浩</div>
-        <div class="keyword">巴萨VS皇马</div>
-        <div class="keyword">脱口秀</div>
-        <div class="keyword">艺博会</div>
-        <div class="keyword">罗纳尔多，欧文</div>
+        <v-touch
+          class="keyword"
+          v-for="(item,index) in personList"
+          :key="index"
+          tag="div"
+          @tap="hanldeSearchHot(item.keyword)"
+        >{{item.keyword}}</v-touch>
       </div>
       <div class="row-title">搜索记录</div>
       <div class="search-history">
@@ -32,21 +29,64 @@
         </ul>
       </div>
     </div>
+    <div class="guess-like-wrap" ref="searchResult">
+      <ul class="activity">
+      
+        <li class="box" v-for="(item,index) in searchList" :key="index">
+          <img
+            :src="item.poster">
+          <div class="info">
+            <div class="title-line">
+              {{item.properName}}</div>
+            <div class="time-address">
+              <span class="time">{{item.timeRange}}</span>
+              <span class="split">|</span>
+              <span class="address">{{item.venueName}}</span>
+            </div>
+            <div class="no-rank">{{item.star}}</div>
+            <div class="price-wrap">
+              <span class="price">{{item.lowPrice}}</span>
+              <span class="qi">元起</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
+import { hotPerData, detailsData } from "@api/home";
 export default {
   name: "Search",
-  methods:{
-      handleBack(){
-          this.$router.back();
-      }
+  data() {
+    return {
+      personList: [],
+      searchList:[],
+    };
+  },
+  methods: {
+    handleBack() {
+      this.$router.back();
+    },
+    async hanldeSearchHot(input) {
+      let data = await detailsData(input);
+      this.searchList=data;
+      console.log(data);
+    }
+  },
+  async created() {
+    let data = await hotPerData();
+    this.personList = data;
+  },
+  mounted(){
+    // this.$refs.searchResult.style.zIndex=999;
+    // this.$refs.search_Box.sstyle.display="none";
   }
 };
 </script>
 <style scoped>
-.search{
-    height:100%;
+.search {
+  height: 100%;
 }
 .ui-searchbox {
   height: 0.44rem;
@@ -58,25 +98,25 @@ export default {
 .ui-inner {
   width: 100%;
   height: 100%;
-  padding-right:0.3rem;
+  padding-right: 0.3rem;
 }
 .ui-wrap {
   width: 100%;
   height: 100%;
   border-radius: 0.17rem;
-    position:relative;
+  position: relative;
   display: flex;
   align-items: center;
 }
-.ui-wrap .ui-icon{
-    position:absolute;
-    margin-left: 0.1rem;
+.ui-wrap .ui-icon {
+  position: absolute;
+  margin-left: 0.1rem;
 }
 .ui-wrap .ui-placeholder {
   width: 100%;
   height: 100%;
-  line-height:100%;
-  text-align:center;
+  line-height: 100%;
+  text-align: center;
   background-color: #eee;
   outline: none;
   border: none;
@@ -148,5 +188,61 @@ export default {
 .search-history ul .remove-all {
   text-align: center;
   color: #ff5636;
+}
+.guess-like .guess-like-title{
+    font-size: 0.18rem;
+    color: #565656;
+    padding: 0 0.18rem;
+}
+.guess-like-wrap{
+ position: relative;
+}
+.guess-like-wrap .activity{
+    margin:0 0.15rem;
+}
+.guess-like-wrap .box{
+    height:1.46rem;
+    padding-top:0.15rem;
+    display: flex;
+}
+.guess-like-wrap .box img{
+    width:0.75rem;
+    height:1rem;
+}
+.guess-like-wrap .box .info{
+    width:1.98rem;
+    height:100%;
+    margin-left:0.2rem;
+    border-bottom: 1px solid hsla(0,0%,90%,.5);
+}
+.guess-like-wrap .box .info .title-line{
+    font-size: 0.15rem;
+    color: #333;
+    line-height: 0.22rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+}
+.guess-like-wrap .box .info .time-address{
+    font-size: 0.12rem;
+    color: #999;
+    margin-top: 9px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.guess-like-wrap .box .info .no-rank{
+    font-size: 0.1rem;
+    color: #999;
+    margin:0.04rem 0 0.16rem;
+}
+.guess-like-wrap .box .info .price-wrap .price{
+    color: #ff2661;
+    font-size: 0.18rem;
+    font-weight: 700;
+}
+.guess-like-wrap .box .info .price-wrap .qi{
+    font-size: 0.1rem;
+    color: #999;
 }
 </style>

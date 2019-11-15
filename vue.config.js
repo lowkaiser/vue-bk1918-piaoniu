@@ -7,6 +7,7 @@ module.exports ={
             "/api":{
                 target:"https://m.piaoniu.com",
                 changeOrigin:true,
+                // pathRewrite: {'^/haha' : ''},
             }
         }
     },

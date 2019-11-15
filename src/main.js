@@ -7,7 +7,11 @@ import "@common/components";
 import "@common/filter";
 import { Swipe, SwipeItem } from 'vant';
 import { Sticky } from 'vant';
+import { SubmitBar } from 'vant';
+import { ActionSheet } from 'vant';
 
+Vue.use(ActionSheet);
+Vue.use(SubmitBar);
 Vue.use(Sticky);
 import "./mock"
 Vue.use(Swipe).use(SwipeItem);

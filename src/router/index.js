@@ -9,6 +9,7 @@ import mine from "./mine";
 import search from "./search";
 import city from "./city";
 import details from "./details";
+import goodsOrder from "./goodsOrder";
 Vue.use(VueRouter);
 
 const router =new VueRouter({
@@ -26,7 +27,8 @@ const router =new VueRouter({
         mine,
         search,
         city,
-        details
+        details,
+        goodsOrder
     ]
 })
 

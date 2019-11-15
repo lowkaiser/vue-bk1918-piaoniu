@@ -48,7 +48,9 @@ export default {
         if(params=="返回"){
           this.$router.back();
         }else{
-          this.$router.push("/city")
+          this.$router.push("/city"+this.$route.path);
+          // this.$router.push({name:"city",params:{path:this.$route.path}})
+          
         }
       }
     }
@@ -100,6 +102,7 @@ export default {
 .topbar .ui-wrap .ui-icon{
     margin: 0 0.1rem;
     color:#262626;
+    font-size:0.16rem;
 }
 .topbar .ui-wrap .ui-placeholder{
      color:#262626;

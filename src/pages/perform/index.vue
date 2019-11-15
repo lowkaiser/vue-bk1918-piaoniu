@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <Header iconRight />
+    <Header iconRight :title="this.$store.state.city.cityName"/>
     <div class="category-home-list">
       <div class="category-menu-wrap">
         <ul class="category-menu-item-container">
@@ -10,6 +10,7 @@
             @tap="handleNavList(index)"
             v-for="(item,index) in navList"
             :key="index"
+            ref="navPosition"
           >{{item.navTitle}}</v-touch>
         </ul>
       </div>
@@ -36,7 +37,7 @@
               <img :src="item.recommendContent.poster" />
               <div class="info">
                 <div class="title-line">
-                  <span>[深圳]</span>
+                  <span>[{{$store.state.city.cityName}}]</span>
                   <span>{{item.recommendContent.properName}}</span>
                 </div>
                 <div class="time-address">
@@ -98,7 +99,9 @@ export default {
         {
           navTitle: "戏曲综艺"
         }
-      ]
+      ],
+      typeId:1,
+      randomIndex:2,
     };
   },
   watch: {
@@ -108,6 +111,10 @@ export default {
     }
   },
   created() {
+    console.log(this.$route);
+    console.log(this.navListActive)
+    this.navListActive=this.$route.params.path;
+    console.log(this.navListActive)
     this.handleGetDetailsData(2);
   },
 
@@ -122,10 +129,20 @@ export default {
       // this.detailsContent = [...this.detailsContent,...data.data.detailsContent];
    }
   },
+  activated(){
+    if(this.typeId==this.randomIndex){
+        this.GussLike=JSON.parse(sessionStorage.getItem("gussLike"))
+    }else{
+      this.handleGetDetailsData(this.randomIndex);
+      this.typeId=this.randomIndex;
+    }
+  },
   mounted() {
+    // this.$refs.navPosition[this.navListActive].offsetLeft=15;
     this.$refs.scroll.handlepullingDown(() => {
       var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       var index = parseInt(0 + Math.random() * 10);
+      this.randomIndex = index;
       this.handleGetDetailsData(arr[index]);
     });
 
