@@ -9,10 +9,7 @@ import mine from "./mine";
 import search from "./search";
 import city from "./city";
 import details from "./details";
-<<<<<<< HEAD
 import mainPerson from "./mainPerson"
-=======
->>>>>>> master
 Vue.use(VueRouter);
 
 const router =new VueRouter({
