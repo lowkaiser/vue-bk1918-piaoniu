@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <Header :title="this.$store.state.city.cityName"></Header>
-    <!-- banner -->
+    <!-- banner to-->
     <div class="banner">
       <van-swipe :autoplay="3000" indicator-color="white">
         <van-swipe-item>
@@ -31,7 +31,7 @@
       <ul class="main-categories">
         <router-link class="entry" 
         tag="li"
-        v-for="(item,index) in iconImg" :key="index" :to="{name:'perform',params:{path:index-0+1}}">
+        v-for="(item,index) in iconImg" :key="index" >
           <img :src="item.icon" />
           <div class="title">{{item.text}}</div>
         </router-link>

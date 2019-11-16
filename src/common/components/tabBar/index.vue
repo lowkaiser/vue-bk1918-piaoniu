@@ -2,9 +2,9 @@
   <div id="footer" class="footer">
     <ul class="footer-box">
       <router-link tag="li" 
-            v-for="item in navs" 
-            :key="item.id" 
-            :to="{name:item.path.slice(1),params:{path:0}}"  
+            v-for="(item,index) in navs" 
+            :key="index" 
+            :to="item.path"  
       >
         <i class="iconfont" v-html="item.icon"></i>
         <span class="title">{{item.text}}</span>
@@ -33,18 +33,12 @@ export default {
         },
         {
           id: 2,
-          text: "发现",
-          icon: "&#xe629",
-          path: "/find"
-        },
-        {
-          id: 3,
           text: "消息",
           icon: "&#xe634",
           path: "/message"
         },
         {
-          id: 4,
+          id: 3,
           text: "我的",
           icon: "&#xe614",
           path: "/mine"
@@ -70,7 +64,7 @@ export default {
   justify-content: space-around;
   align-items: center;
 }
-.footer .footer-box .router-link-active{
+.router-link-active{
     color:red;
 }
 .footer .footer-box .iconfont {
