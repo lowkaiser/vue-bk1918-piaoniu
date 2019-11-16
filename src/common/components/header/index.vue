@@ -13,7 +13,7 @@
             to="/search"
             >
             <div class="ui-icon iconfont icon-search">&#xe630;</div>
-          <input class="ui-placeholder" placeholder="搜索明星、演出、场馆" />
+          <input class="ui-placeholder" placeholder="搜索明星、演出、场馆" @change="handleSearch($event)"/>
         </router-link>
         </div>
       </div >
@@ -50,8 +50,11 @@ export default {
         }else{
           this.$router.push("/city"+this.$route.path);
           // this.$router.push({name:"city",params:{path:this.$route.path}})
-          
         }
+      },
+      handleSearch(e){
+        let val=e.target.value;
+        this.$store.dispatch("search/handleActionsData",val)
       }
     }
 }

@@ -3,7 +3,8 @@
     <Header title="返回" iconLeft iconRight />
     <!-- <div class="cancle">取消</div> -->
 
-    <div class="default-search list-keyword" ref="search_Box">
+    <div class="default-search list-keyword" ref="search_Box" v-show="flag=='true'">
+      <div v-show="flag">内容为空</div>
       <div class="row-title">热门搜索</div>
       <div class="hot-searches">
         <v-touch
@@ -17,21 +18,23 @@
       <div class="row-title">搜索记录</div>
       <div class="search-history">
         <ul>
-          <li>
-            艺博会
-            <span class="remove">删除</span>
+          <li v-for="(item,index) in searHistory" :key="index"
+          >
+            {{item.name}}
+            <v-touch 
+              tag="span"
+              @tap="hanldeDelete(index)"
+            class="remove">删除</v-touch >
           </li>
-          <li>
-            吴青峰
-            <span class="remove">删除</span>
-          </li>
-          <li class="remove-all">清除历史记录</li>
+          <v-touch 
+            tag="li"
+            @tap="handleDeleteAll()"
+          class="remove-all">清除历史记录</v-touch>
         </ul>
       </div>
     </div>
-    <div class="guess-like-wrap" ref="searchResult">
+    <div class="guess-like-wrap" ref="searchResult" v-show="flag==false">
       <ul class="activity">
-      
         <li class="box" v-for="(item,index) in searchList" :key="index">
           <img
             :src="item.poster">
@@ -56,13 +59,22 @@
 </template>
 <script>
 import { hotPerData, detailsData } from "@api/home";
+import {mapState} from "vuex";
 export default {
   name: "Search",
   data() {
     return {
       personList: [],
       searchList:[],
+      flag:true,
     };
+  },
+  computed:{
+    ...mapState({
+        searHistory:state=>state.search.searHistory,
+        searchList:state=>state.search.searData
+
+    }),
   },
   methods: {
     handleBack() {
@@ -71,16 +83,28 @@ export default {
     async hanldeSearchHot(input) {
       let data = await detailsData(input);
       this.searchList=data;
-      console.log(data);
+    },
+    hanldeDelete(index){
+       this.$store.commit("search/hanldeMutations",index);
+    },
+    handleDeleteAll(){
+      this.$store.commit("search/hanldeMutationsAll");
     }
   },
   async created() {
     let data = await hotPerData();
     this.personList = data;
   },
-  mounted(){
-    // this.$refs.searchResult.style.zIndex=999;
-    // this.$refs.search_Box.sstyle.display="none";
+  updated(){
+    let length=this.$store.state.search.searData.length;
+    console.log(this.$store.state.search.searData)
+    if(length=0){
+      this.flag=false;
+    }else{
+      this.searchList=this.$store.state.search.searData;
+      this.flag=true;
+    }
+    // this.searchList=thi
   }
 };
 </script>
@@ -196,6 +220,7 @@ export default {
 }
 .guess-like-wrap{
  position: relative;
+ background-color:#fff;
 }
 .guess-like-wrap .activity{
     margin:0 0.15rem;

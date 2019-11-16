@@ -23,7 +23,6 @@ export default {
             //开启下拉刷新
             pullDownRefresh:{
                 threshold:50,
-
             },
             //开启上拉加载更多 
             pullUpLoad:true,

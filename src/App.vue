@@ -6,18 +6,19 @@
       
       <!-- 判断底部 是否需要 -->
       <TabBar v-if="$route.meta.flag"/>
+      <!-- <MessageBox /> -->
   </div>
+  
 </template>
 
 <script>
 import TabBar from "@common/components/tabBar"
-
+// import messageBox from "./lib/messageBox/index.js"
 export default {
   name: 'app',
   components: {
     TabBar,
   },
-  
 }
 </script>
 

@@ -2,7 +2,6 @@ import  Vue from "vue";
 import VueRouter from "vue-router";
 import home from  "./home";
 import perform from "./perform";
-import find from "./find";
 import login from "./login";
 import message from "./message";
 import mine from "./mine";
@@ -27,8 +26,7 @@ const router =new VueRouter({
             redirect:"home"
         },
         home,
-        perform,
-        find, 
+        perform, 
         login,
         message,
         mine,
