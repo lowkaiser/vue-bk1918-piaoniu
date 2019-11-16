@@ -8,6 +8,10 @@ module.exports ={
                 target:"https://m.piaoniu.com",
                 changeOrigin:true,
                 // pathRewrite: {'^/haha' : ''},
+            },
+            "/users":{
+                target:"http://localhost:3000",
+                changeOrigin:true,
             }
         }
     },

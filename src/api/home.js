@@ -1,6 +1,6 @@
 import http from "@utils/request";
 
-//近期热门 借口
+//近期热门 接口
 export const HotData = (pageIndex) => http({
     method: "get",
     url: "/api/v1/activities/hot",

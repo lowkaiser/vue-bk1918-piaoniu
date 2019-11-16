@@ -29,16 +29,18 @@ export default {
             console.log(this.password)
         },
      async handleregistered(){
-            let tel=this.name; 
-            let pwd=this.password;
-               console.log(tel,pwd)
+            let username=this.name; 
+            let password=this.password;
+               //console.log(tel,pwd)
             //console.log("/users/list?tel="+tel+"&pwd="+pwd)
-            let data=await handleRegister(tel,pwd);
-            // if(data.data.info=="成功"){
-                console.log(data)
-            //    this.$router.push({name:"mine",params:{tel:tel}})
+            let data=await handleRegister(username,password);
+             console.log(data)
+             if(data.data.status==1){             
+                alert(data.data.info);
+                this.$router.push("/login/logined")
+                //this.$router.push({name:"mine",params:{username:username,password:password}})
             //    console.log(this.$route.params.tel)
-          // }
+           }
         }
     },
 }
