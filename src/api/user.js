@@ -1,17 +1,25 @@
 import http from "@utils/request";
 
-export const handleLogined = (tel, pwd) => http({
+
+export const handleRegister = (username,password) => http({
     method: "get",
-    url: "/users/login?tel="+tel+"&pwd="+pwd,
-    success:function(res){
-        console.log(res)
+    url: "/users/register",
+    data: {
+        username,
+        password
+    },
+    
+})
+
+export const handleLogined = (username,password) => http({
+    method: "get",
+    url: "/users/login",
+    data: {
+        username,
+        password
     }
 })
 
-export const handleRegister = (tel,pwd)=> http({
-    method:"get",
-    url:"/users/register?tel="+tel+"&pwd="+pwd,
-    success:function(res){
-        console.log(res)
-    }
-})
+
+
+

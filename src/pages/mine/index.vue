@@ -149,11 +149,11 @@ export default {
   },
 methods: {
     hande(){
-        console.log(this.$route.params.tel)
-        if(this.$route.params.tel==undefined){
+        console.log(this.$route.query.tel)
+        if(this.$route.query.tel==undefined){
             this.username="登录"
         }else{
-       this.username=this.$route.params.tel
+       this.username=this.$route.query.tel
 
         }
     },
