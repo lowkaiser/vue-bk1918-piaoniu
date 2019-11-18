@@ -279,7 +279,7 @@
      
      
         <p>所有评论138条</p>
-        <router-link tag="p" to="allComment">全部评论</router-link>
+        <router-link tag="p" to="/allComment">全部评论</router-link>
     </div>
 
     <!-- 相关演出 -->

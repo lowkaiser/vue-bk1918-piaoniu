@@ -1,16 +1,25 @@
-import { SearchData } from "@api/home";
+import { SearchData,detailsData } from "@api/home";
 let state = {
     searData:[],
+    searchList:[],
     searHistory:JSON.parse(sessionStorage.getItem("searHistory"))||[],
 }
 let actions = {
     async handleActionsData({commit},input) {
-        
         let data = await SearchData(input);
         commit("handleMutationsData",{data,input});
     },
+    async handleActionHot({commit},input){
+        let data = await detailsData(input);
+        console.log(data);
+        commit("handleMutationsHot",data);
+    }
+   
 }
 let mutations = {
+    handleMutationsHot(state,params){
+        state.searchList=params;
+    },
     handleMutationsData(state,params){
         let {data,input}=params;
         let obj={}

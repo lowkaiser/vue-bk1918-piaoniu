@@ -27,6 +27,7 @@
   </div>
 </template>
 <script>
+import {throttle} from "@utils/throttle";
 export default {
     name:"Header",
     props:{
@@ -53,7 +54,8 @@ export default {
         }
       },
       handleSearch(e){
-        let val=e.target.value;
+        let val = e.target.value;
+        console.log(val)
         this.$store.dispatch("search/handleActionsData",val)
       }
     }
