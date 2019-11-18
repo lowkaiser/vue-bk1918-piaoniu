@@ -56,9 +56,18 @@ export const personsData = (id) => http({
 //热门信息搜索
 export const hotPerData = () => http({
     method: "get",
-    url: "api/v1/activities/hottest",
+    url: "/api/v1/activities/hottest",
     data: {
       
+    }
+})
+export const commentData = (activityId) => http({
+    method: "get",
+    url: "/api/v3/reviews",
+    data: {
+        activityId,
+        pageIndex:1,
+        pageSize:10
     }
 })
 
