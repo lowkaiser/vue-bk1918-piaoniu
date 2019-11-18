@@ -10,6 +10,7 @@
 
 <script>
 import {handleRegister} from "@api/user"
+
 export default {
     data(){
         return {
@@ -36,10 +37,13 @@ export default {
             let data=await handleRegister(username,password);
              console.log(data)
              if(data.data.status==1){             
-                alert(data.data.info);
+                //alert(data.data.info);
+                this.$toast(data.data.info);
                 this.$router.push("/login/logined")
                 //this.$router.push({name:"mine",params:{username:username,password:password}})
             //    console.log(this.$route.params.tel)
+           }else{
+              this.$toast(data.data.info);
            }
         }
     },

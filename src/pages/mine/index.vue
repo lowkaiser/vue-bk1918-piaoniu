@@ -8,13 +8,13 @@
         <div class="person">
           <div class="person_info">
             <img
-              src="http://static.piaoniu.com/m/static/img/defaultAvatar.99f8eed.png"
+             :src="pic"
               alt
               class="person_img"
             />
             <div class="person_info_rig">
               <div class="person_per">
-                <router-link tag="p" to="/login">{{username}}</router-link>
+                <router-link tag="p" to="/login">{{user}}</router-link>
               </div>
               <div class="person_btn">
                 <router-link tag="p" to="/mainPerson">个人主页</router-link>
@@ -142,10 +142,14 @@ export default {
    data() {
     return {
       username:"",
+      user:'',
+      pic:''
     }
   },
   created() {
-    this.hande()
+    // this.hande()
+    this.user =this.$cookies.get("name");
+    this.pic =this.$cookies.get("urlPic");
   },
 methods: {
     hande(){

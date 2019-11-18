@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="right">
-                <p><span>用户136********</span><span>新手</span></p>
+                <p><span>{{user}}</span><span>新手</span></p>
                 <p>这家伙很懒 什么都没有留下</p>
             </div>
        
@@ -45,7 +45,7 @@
             <li>想看</li>
         </ul>
         <div class="center1">
-            <img src="//static.piaoniu.com/m/static/img/empty-face.36b9396.png" alt="">
+            <img src="pic" alt="">
             <p>没有结果</p>
         </div>
     </main>
@@ -54,7 +54,17 @@
 
 <script>
 export default {
-
+    data(){
+    return{
+            user:'',
+            pic:''
+           }
+    },
+     created() {
+    
+    this.user =this.$cookies.get("name");
+    this.pic =this.$cookies.get("urlPic");
+  },
 }
 </script>
 

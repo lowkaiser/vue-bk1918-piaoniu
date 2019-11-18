@@ -32,20 +32,36 @@ export default {
       let password = this.password;
       let data = await handleLogined(username, password);
       console.log(data);
-      if (data.data.code == 1) {
-        alert(data.data.info);
-        console.log(this.$route.params);
-        this.$router.push({
-          name: "mine",
-          //params: { username: username, password: password }
-        });
-      } else {
-        alert(data.data.info);
+     if(data.data.code == 0){
+          this.$toast(data.data.info);
+      }else{
+          this.$toast(data.data.info);
+          console.log(data.data)
+          if(this.$cookies.get("token")){
+              this.$cookies.set("name",data.data.list.name)
+              this.$cookies.set("urlPic",data.data.list.urlPic);
+              this.$router.push("/mine");
+          }
       }
+
+      // if (data.data.code == 1) {
+      //    this.$toast(data.data.info);
+         
+
+        // this.$router.push({
+        //   name: "mine",
+        //   query: { username: username, password: password }
+         
+        // });
+      // } else {
+      //    this.$toast(data.data.info);
+      // }
+      //  console.log(this.$route.query)
       //    this.$router.push({name:"mine",params:{tel:tel}})
       //    console.log(this.$route.params.tel)
     }
   }
+  
 };
 </script>
 
