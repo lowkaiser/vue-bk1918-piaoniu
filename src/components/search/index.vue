@@ -3,8 +3,8 @@
     <Header title="返回" iconLeft iconRight />
     <!-- <div class="cancle">取消</div> -->
 
-    <div class="default-search list-keyword" ref="search_Box" v-show="flag=='true'">
-      <div v-show="flag">内容为空</div>
+    <div class="default-search list-keyword" ref="search_Box" >
+      <!-- <div >内容为空</div> -->
       <div class="row-title">热门搜索</div>
       <div class="hot-searches">
         <v-touch
@@ -33,7 +33,7 @@
         </ul>
       </div>
     </div>
-    <div class="guess-like-wrap" ref="searchResult" v-show="flag==false">
+    <div class="guess-like-wrap" ref="searchResult" >
       <ul class="activity">
         <router-link class="box" v-for="(item,index) in searchList" :key="index"
         tag="li"
@@ -68,24 +68,32 @@ export default {
   data() {
     return {
       personList: [],
-      searchList:[],
-      flag:true,
+      // searchList:'',
+      // flag:true,
     };
   },
   computed:{
     ...mapState({
         searHistory:state=>state.search.searHistory,
         searchList:state=>state.search.searData
-
     }),
+    // searchList(){
+    //   let length=this.$store.state.search.searData.length;
+    //   console.log(length)
+    //   if(length=0){
+    //     this.flag=true;
+    //   }else{
+    //     this.flag=false;
+    //     return this.$store.state.search.searData;
+    //  }
+    // }
   },
   methods: {
     handleBack() {
       this.$router.back();
     },
-    async hanldeSearchHot(input) {
-      let data = await detailsData(input);
-      this.searchList=data;
+   hanldeSearchHot(input) {
+      this.$store.dispatch("search/handleActionHot",input);
     },
     hanldeDelete(index){
        this.$store.commit("search/hanldeMutations",index);
@@ -95,21 +103,38 @@ export default {
     }
   },
   async created() {
+    // this.searchList=this.$store.state.search.searData.length;
     let data = await hotPerData();
     this.personList = data;
   },
-  updated(){
-    let length=this.$store.state.search.searData.length;
-    console.log(this.$store.state.search.searData)
-    if(length=0){
-      this.flag=false;
-    }else{
-      this.searchList=this.$store.state.search.searData;
-      this.flag=true;
-    }
-    // this.searchList=thi
-  }
-};
+  // watch:{
+    
+  //   searchList(newVal,oldVal){
+  //     let length=oldVal.length;
+  //     console.log(newVal,oldVal)
+  //     if(length=0){
+  //       this.flag=true;
+  //     }else{
+  //       this.searchList=this.$store.state.search.searData;
+  //       this.flag=false;
+  //    }
+  //   }
+  // }
+  // watch:{
+  //   let length=this.$store.state.search.searData.length;
+  // }
+  // updated(){
+  //   let length=this.$store.state.search.searData.length;
+  //   console.log(this.$store.state.search.searData)
+  //   if(length=0){
+  //     this.flag=false;
+  //   }else{
+  //     this.searchList=this.$store.state.search.searData;
+  //     this.flag=true;
+  //   }
+  //   // this.searchList=thi
+  // }
+}
 </script>
 <style scoped>
 .search {

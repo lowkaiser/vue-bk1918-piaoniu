@@ -13,26 +13,28 @@
     <div class="comment_box">
       <div class="hang">
         <img
-          src="https://img.piaoniu.com/poster/7f153930860643e632ca9e34ef91a7b5b62ef5fe.jpg?imageView2/2/w/76/h/102/format/jpg/q/60"
-          alt
+          :src="detailContent.poster"
         />
         <div>
-          <p>张信哲佛山演唱会</p>
-          <p>2019.11.16 19:30</p>
+          <p>{{detailContent.properName}}</p>
+          <p>{{detailContent.timeRange}}</p>
         </div>
       </div>
 
-      <li class="feed-item">
+      <li class="feed-item" 
+        v-for="(item,index) in commentContent" :key="index"
+        
+        >
         <div class="feed-head">
           <img
-            src="https://img.piaoniu.com/user/354011/avatar/1514455284331.jpg?imageView2/2/w/72/h/72/format/jpg/q/100"
+            :src="item.content.user.avatar"
           />
           <div class="head-info">
-            <div class="name">票牛福利汪</div>
-            <div class="text">官方</div>
+            <div class="name">{{item.content.user.userName}}</div>
+            <div class="text">lv{{item.content.user.level}}</div>
           </div>
         </div>
-        <div class="feed-content">
+        <div class="feed-content" >
           <div class="feed-review-content">
             <div class="rank-row">
               <div class="text">我评论：</div>
@@ -56,38 +58,37 @@
             </div>
             <div class="content-row">
               <div class="content">
-                <span class="title">#周杰伦麦田音乐节#</span>
-                <span>
-                  由于没人准确猜对小公举的着装，所以本汪从积极参与的用户中挑选比较接近答案并且用心分享的用户送上 周杰伦专辑 恭喜@DanielWu
-                  @魔法下馆子...
+                <span class="title">#{{item.content.activity.subCategoryName}}#</span>
+                <span class="user-content">
+                 {{item.content.content}}
                 </span>
               </div>
               <a href="javascript(0)" class="more">全文</a>
             </div>
             <div class="image-list">
               <img
-                src="https://img.piaoniu.com/review/05933d65c85d883c8be04bda203172f3ff6dbea7_ts.jpg?imageView/2/w/360/h/540/format/jpg"
+                :src="item.content.activity.poster"
               />
             </div>
             <div class="activity-card">
               <img
-                src="https://img.piaoniu.com/poster/1490645c8a7457e0674c19007d3feaa549dfb81e.jpg?imageView2/2/w/76/h/102/format/jpg/q/60"
+                :src="item.content.activity.poster"
               />
               <div class="activity-right">
-                <div class="activity-name" style="-webkit-line-clamp: 1;">周杰伦 蔡依林2019麦田音乐节 北京站</div>
-                <div class="time-range">2019.05.25 - 05.26</div>
+                <div class="activity-name" style="-webkit-line-clamp: 1;">{{item.content.activity.subCategoryName}}{{item.content.activity.venueName}}</div>
+                <div class="time-range">{{item.content.activity.timeRange}}</div>
               </div>
             </div>
           </div>
           <div class="feed-interaction">
             <div class="time">5月27日 19:03</div>
             <div class="interaction-button interaction-support">
-              <img src="http://static.piaoniu.com/m/static/img/icon-like-white.15350f3.png" />
-              <span class="num">20000</span>
+              <span class="iconfont">&#xe680;</span>
+              <span class="num">{{item.content.likes}}</span>
             </div>
             <div class="interaction-button interaction-reject">
-              <img src="http://static.piaoniu.com/m/static/img/icon-like-white.15350f3.png" />
-              <span class="num">3333</span>
+              <span class="iconfont">&#xe634;</span>
+              <span class="num">{{item.content.replyCount}}</span>
             </div>
           </div>
         </div>
@@ -97,7 +98,25 @@
 </template>
 
 <script>
-export default {};
+import { commentData } from "@api/home";
+export default {
+  name:"allComment",
+  props:["id","properName"],
+  data(){
+    return{
+      detailContent:[],
+      commentContent:[],
+    }
+  },
+  async created (){
+    console.log(this.id);
+    let data =await  commentData(80510);
+    this.detailContent=data.activity;
+    console.log(data.activity);
+    this.commentContent=data.data;
+    console.log(data.data);
+  }
+};
 </script>
 
 <style scoped>
@@ -160,6 +179,7 @@ header {
 .feed-head img {
   width: 0.36rem;
   height: 0.36rem;
+  border-radius:50%;
 }
 .head-info {
   height: 0.42rem;
@@ -210,15 +230,22 @@ header {
 /* 文字 */
 
 .feed-content .feed-review-content .content-row {
-  height: 1rem;
+  height: 1.2rem;
   margin: 0.06rem 0 0.08rem;
 }
 
 .feed-content .feed-review-content .content-row .content {
+  height:1rem;
   font-size: 0.14rem;
   word-break: break-all;
   color: #262626;
   line-height: 0.2rem;
+}
+.feed-content .feed-review-content .content-row .user-content{
+  display:inline-block;
+  height:0.8rem;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 .feed-content .feed-review-content .content-row .content .title {
   color: #4b8feb;
@@ -279,18 +306,17 @@ header {
   margin-left: 0.1rem;
   height: 0.28rem;
 }
-.feed-content .feed-interaction .interaction-button img {
+.feed-content .feed-interaction .interaction-button {
   width: 0.24rem;
   height: 0.28rem;
+  line-height:0.28rem;
+  text-align:center;
 }
 .feed-content .feed-interaction .interaction-button .num {
   color: #999999;
   font-size: 0.12rem;
   display: block;
   margin-left: 0.08rem;
-  text-align: left;
-  height: 0.26rem;
-  line-height: 0.26rem;
 }
 .feed-content .feed-interaction .interaction-reject {
   margin-right: 0.15rem;
