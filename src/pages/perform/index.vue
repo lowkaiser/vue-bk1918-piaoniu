@@ -21,7 +21,7 @@
 
         <div class="listing-filter-item listing-filter-item--pop">全部时间</div>
         <div class="listing-filter-pop" style="display:none;"></div>
-        <a href="/sz-concerts/seatMap" class="listing-filter-item">在线选座</a>
+        <div  class="listing-filter-item">在线选座</div>
       </div>
     </van-sticky>
     <Kaiser-scroll ref="scroll">
@@ -33,7 +33,9 @@
                 src="https://img.piaoniu.com/searchBanner/67f75d69e260738648adad6b66872f4b38af7907.png"
               />
             </div>
-            <li class="box" v-for="(item,index) in detailsContent" :key="index" :href="'https://m.piaoniu.com/activity/'+item.recommendContent.id">
+            <router-link class="box" v-for="(item,index) in detailsContent" 
+            :to="'details/'+item.recommendContent.id+'/'+item.recommendContent.properName"
+            :key="index" :href="'https://m.piaoniu.com/activity/'+item.recommendContent.id">
               <img :src="item.recommendContent.poster" />
               <div class="info">
                 <div class="title-line">
@@ -51,7 +53,7 @@
                   <span class="qi">元起</span>
                 </div>
               </div>
-            </li>
+            </router-link>
           </ul>
         </div>
       </div>
@@ -117,10 +119,12 @@ export default {
     console.log(this.navListActive)
     this.handleGetDetailsData(2);
   },
-
   methods: {
-    handleNavList(index) {
+    async handleNavList(index) {
       this.navListActive = index;
+      let  page=this.navListActive-0+1
+      let data = await gussLike(page);
+      this.detailsContent = data.data;
     },
     async handleGetDetailsData(pageIndex) {
       let data = await gussLike(pageIndex);

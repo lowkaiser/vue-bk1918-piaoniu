@@ -31,6 +31,7 @@
       <ul class="main-categories">
         <router-link class="entry" 
         tag="li"
+        to="/perform"
         v-for="(item,index) in iconImg" :key="index" >
           <img :src="item.icon" />
           <div class="title">{{item.text}}</div>
@@ -83,7 +84,9 @@
         </div>
         <div class="activities">
           <ul class="wrap">
-            <li class="activity-floor-item" v-for="(item,index) in hotContent" :key="index">
+            <router-link class="activity-floor-item" tag="li"
+            :to="'details/'+item.id+'/'+item.properName"
+            v-for="(item,index) in hotContent" :key="index">
               <div class="item-img">
                 <img :src="item.poster" />
               </div>
@@ -92,7 +95,7 @@
                 <span class="price-num">￥{{item.lowPrice}}</span>
                 <span class="price-asc">起</span>
               </div>
-            </li>
+            </router-link>
           </ul>
         </div>
       </div>
