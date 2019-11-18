@@ -35,7 +35,10 @@
     </div>
     <div class="guess-like-wrap" ref="searchResult" v-show="flag==false">
       <ul class="activity">
-        <li class="box" v-for="(item,index) in searchList" :key="index">
+        <router-link class="box" v-for="(item,index) in searchList" :key="index"
+        tag="li"
+        :to="'details/'+item.id+'/'+item.properName"
+        >
           <img
             :src="item.poster">
           <div class="info">
@@ -52,7 +55,7 @@
               <span class="qi">元起</span>
             </div>
           </div>
-        </li>
+        </router-link>
       </ul>
     </div>
   </div>

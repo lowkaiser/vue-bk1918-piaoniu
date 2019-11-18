@@ -17,14 +17,14 @@
         <!---->
         <div class="card-main">
           <div class="card-main__left">
-            <div class="card-main__name">芭莎明星慈善夜</div>
-            <div class="card-main__date-time">2019年11月16日 周六 18:00</div>
-            <div class="card-main__venue">北京工人体育馆</div>
+            <div class="card-main__name">{{$store.state.ticket.goodsName}}</div>
+            <div class="card-main__date-time">{{$store.state.ticket.goodsTime}}</div>
+            <div class="card-main__venue">{{$store.state.ticket.goodsAddress}}</div>
             <div class="ticket-category card-main__category">
-              <div class="ticket-category__name">票档:看台1280元</div>
+              <div class="ticket-category__name">票档:{{$store.state.ticket.goodsPrice}}</div>
               <div class="ticket-category__area"></div>
               <div class="ticket-category__continue"></div>
-              <div class="ticket-category__num">x1</div>
+              <div class="ticket-category__num">x{{$store.state.ticket.goodsNum}}</div>
               <!---->
             </div>
             <div class="card-main__tip">
@@ -60,20 +60,44 @@
         </div>
       </div>
     </div>
-    <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit" />
+    <div class="van-submit-bar">
+      <div class="van-submit-bar__bar">
+        <div class="van-submit-bar__text">
+          <span>合计：</span>
+          <span class="van-submit-bar__price">¥{{price.sPrice}}</span>
+        </div>
+        <v-touch
+        tag="button"
+        @tap="onSubmit"
+          class="van-button   van-submit-bar__button"
+        >
+          提交订单
+        </v-touch>
+      </div>
+    </div>
   </div>
 </template>
 <script>
+import { mapGetters, mapState } from "vuex";
 export default {
   name: "GoodsOrder",
   data() {
     return {
+      num: 0
     };
   },
   methods: {
     onSubmit() {
       console.log(123);
-    },
+    }
+  },
+  computed: {
+    ...mapGetters({
+      price: "ticket/countPrice"
+    })
+  },
+  created() {
+    console.log(this.$store);
   }
 };
 </script>
@@ -268,5 +292,42 @@ export default {
 .card-main__poster {
   width: 0.4rem;
   height: 0.54rem;
+}
+.van-submit-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    background-color: #fff;
+    user-select: none;
+}
+.van-submit-bar__bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 50px;
+    font-size: 14px;
+}
+.van-submit-bar__text {
+    flex: 1;
+    padding-right: 12px;
+    color: #323233;
+    font-weight: 500;
+    text-align: right;
+}
+.van-submit-bar__text span {
+    display: inline-block;
+}
+.van-submit-bar__price {
+    color: #ee0a24;
+    font-size: 18px;
+}
+.van-button{
+  width:1.1rem;
+  height:0.5rem;line-height: 0.5rem;
+  color: #fff;
+    background-color: #ee0a24;
+    border:none;
 }
 </style>

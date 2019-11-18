@@ -1,7 +1,6 @@
 export default {
     path: "/perform",
-    component: _ => import("@pages/perform"),
-
+    component: _=> import("@pages/perform"),
     name: "perform",
     // redirect: "/perform",
     // children: [

@@ -13,7 +13,10 @@
 
     <!-- 演出详情 -->
     <div class="head_detail">
-      <img src="http://static.piaoniu.com/nuxt-static/img/back-grey.b0b2b3e.png" alt />
+      <v-touch class="iconfont head_icon"
+        tag="div"
+        @tap="handleBack()"
+      >&#xe62f;</v-touch>
       <div>演出详情</div>
     </div>
 
@@ -351,7 +354,11 @@
         <img src="http://static.piaoniu.com/nuxt-static/img/custom-service.89c653b.png" alt />
         <span>客服</span>
       </div>
-      <div>这就预定</div>
+      <v-touch :class="comContent.status==1?'server-buy':'server-order'"
+        tag="div"
+        to="/buyTicket"
+        @tap="handleSend()"
+      >{{comContent.status==1?"直接购票":"这就预定"}}</v-touch>
     </div>
   </div>
 </template>
@@ -365,15 +372,27 @@ export default {
       comContent: []
     }
   },
+  methods:{
+    handleBack(){
+      this.$router.back();
+    },
+    handleSend(){
+      this.$router.push("/buyTicket/"+this.properName)
+      this.$store.commit("ticket/handleMutationSendAdd",this.comContent.venueName)
+      this.$store.commit("ticket/handleMutationSendName",this.comContent.shortname)
+                                                     
+    }
+  },
   async created (){
+    console.log(this);
       let data =await  detailsData(this.properName);
+      this.comContent=data[0];
+      console.log(data[0]);
       // 艺人详情信息 
     //   let index=parseInt(Math.random()*20000)
-    //   let perData=await personsData(index);
+      // let perData=await personsData(this.id);
     //   //图片模糊度！！！！！
-    //   console.log(perData)
-      this.comContent=data[0];
-      console.log(this.comContent)
+      // console.log(perData)
   }
 
 };
@@ -431,7 +450,8 @@ body {
   height: 0.44rem;
   align-items: center;
 }
-.head_detail img {
+
+.head_detail .head_icon {
   width: 0.11rem;
   height: 0.19rem;
   position: absolute;
@@ -1061,5 +1081,11 @@ body {
   background-color: #fd8612;
   font-size: 0.16rem;
   color: #fff;
+}
+.server_footer .server-order {
+  background-color:#ff2661;
+}
+.server_footer .server-buy{
+  background-color:#fd8612;
 }
 </style>

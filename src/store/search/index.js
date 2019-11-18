@@ -41,6 +41,9 @@ let mutations = {
     hanldeMutationsAll(state){
         state.searHistory.splice(0);
         sessionStorage.setItem("searHistory",JSON.stringify(state.searHistory))
+    },
+    handleMutationSend(state,params){
+        console.log(params);
     }
 }
 export default {

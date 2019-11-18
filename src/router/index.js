@@ -16,6 +16,7 @@ import wantFan from "./wantFan";
 import wantComment from "./wantComment";
 import allComment from "./allComment";
 import myaddr from "./address"
+import buyTicket from "./buyTicket";
 Vue.use(VueRouter);
 
 const router =new VueRouter({
@@ -40,7 +41,8 @@ const router =new VueRouter({
         wantFan,
         wantComment,
         allComment,
-        myaddr
+        myaddr,
+        buyTicket
     ]
 })
 
